@@ -1,0 +1,73 @@
+﻿@page "/"
+    <AuthorizeView>
+        <NotAuthorized>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card text-white bg-info mb-3 text-center">
+                        <div class="card-header">Login</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/identity/account/login" class="text-light display-1"><i class="bi bi-box-arrow-in-right"></i></a></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-success mb-3 text-center">
+                        <div class="card-header">Register</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/register" class="text-light display-1"><i class="bi bi-person-plus"></i></a></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-white bg-danger mb-3 text-center">
+                        <div class="card-header">About</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/About" class="text-light display-1"><i class="bi bi-question-lg"></i></a></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+    <AuthorizeView>
+        <Authorized>
+            <div class="row mt-4">
+                <div class="col-lg-3 col-6-3 col-sm-6">
+                    <div class="card shadow text-white bg-info mb-3 text-center">
+                        <div class="card-header">Reports</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/reports" class="text-light display-1"><i class="bi bi-card-text" aria-hidden="true"></i></a></h1>
+                        </div>
+                        <div class="pb-5">Any report</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6-3 col-sm-6">
+                    <div class="card shadow text-white bg-success mb-3 text-center">
+                        <div class="card-header">Profile</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/userprofile" class="text-light display-1"><i class="bi bi-person-lines-fill"></i></a></h1>
+                        </div>
+                        <div class="pb-5">Edit your profile</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6-3 col-sm-6">
+                    <div class="card shadow text-white bg-danger mb-3 text-center">
+                        <div class="card-header">Find user</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/allusers" class="text-light display-1"><i class="bi bi-search"></i></a></h1>
+                        </div>
+                        <div class="pb-5">Find user</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6-3 col-sm-6">
+                    <div class="card shadow text-white bg-warning mb-3 text-center">
+                        <div class="card-header">Messages</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="/MessagesList" class="text-light display-1"><i class="bi bi-chat"></i></a></h1>
+                        </div>
+                        <div class="pb-5">List of messages</div>
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>

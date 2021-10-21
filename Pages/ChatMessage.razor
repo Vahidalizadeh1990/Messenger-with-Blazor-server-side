@@ -1,0 +1,63 @@
+﻿@page "/allusers"
+@inherits ChatMessageBase
+@attribute [Authorize]
+    <div class="pt-5">
+        <h3>Search with email</h3>
+        <small class="text-secondary fw-light">It shows all the profile users. So if you didn't create your profile, you should create it first.</small>
+
+        <div class="row text-center">
+            <div class="col-md-6 offset-md-3">
+                <div class="input-group mb-3 mt-3">
+                    <input type="text" class="form-control" @bind-value="@EmailForSearch" placeholder="Search user name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-info" @onclick="Search"><i class="bi bi-search"></i></button>
+
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            @if (Loading == true)
+            {
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                @if (Message != null)
+                {
+                    <h2 class="text-danger text-center"><i class="bi bi-exclamation-lg"></i>@Message</h2>
+                }
+                else
+                {
+                    @foreach (var item in identityUser)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 pb-3 pt-3">
+                            <div class="card shadow text-center h-100">
+                                <div class="card-body">
+                                    <div class="pb-3">
+                                        <img src="/UserProfile/@item.Image" class="img-fluid rounded-circle shadow" width="120" height="120" alt="@item.User.UserName" />
+                                    </div>
+                                    <h6 class="text-secondary fw-light">@item.User.UserName</h6>
+
+                                </div>
+                                <div class="card-footer">
+                                    @if (item != null)
+                                    {
+                                        <a href="/chat/@item.UserId" class="card-link float-left" title="Chat"><i class="bi bi-chat-dots"></i></a>
+                                    }
+
+                                    @if (item.Private == false)
+                                    {
+                                        <a href="/viewuserdetails/@item.UserId" class="card-link text-decoration-none" title="Details"><i class="bi bi-three-dots-vertical"></i></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>

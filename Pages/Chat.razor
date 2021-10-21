@@ -1,0 +1,109 @@
+﻿@page "/chat/{toUserId}"
+@attribute [Authorize]
+@inherits ChatBase
+@implements IDisposable
+<div class="mt-5 shadow">
+    <div class="p-5">
+        <div class="row text-center">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <h6 class="text-secondary">
+                    @FromEmail
+                </h6>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                @Typing
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <h6 class="text-secondary">
+                    To: @ToEmail
+                </h6>
+
+            </div>
+        </div>
+        <div class="text-center pt-5 pb-5">
+            <button class="btn btn-primary shadow" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
+                <i class="bi bi-clock-history"></i> History
+            </button>
+        </div>
+        <div class="collapse text-center" id="collapseHistory">
+            <button class="btn btn-light rounded-circle shadow" @onclick="Loadmore"><i class="bi bi-arrow-clockwise"></i></button>
+            <hr />
+            @if (Loading == true)
+            {
+                <div class="d-flex justify-content-center pt-5 pb-5">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="scroll-history">
+                    <div class="col-md-10 offset-md-1">
+
+                        @foreach (var chat in ChatMessages.OrderBy(x=>x.Id))
+                        {
+                            <div class="@(chat.FromUser.UserName == ToEmail? "col-md-12 float-start" : "col-md-12 float-end")">
+                                <div class="shadow rounded-3 p-4 mb-3 @(chat.FromUser.UserName == ToEmail? "bg-info float-start col-md-10" : "bg-dark text-light col-md-10 float-end")">
+                                    <p>@chat.FromUser.UserName : @chat.Message</p>
+                                    <p class="text-end">
+                                        @if (chat.Seen == true)
+                                        {
+                                            <i class="bi bi-check2-all text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-check2 text-secondary"></i>
+                                        }
+                                    </p>
+                                    <small class="text-end">@chat.Date.ToString("dddd, dd MMMM yyyy HH:mm")</small>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="chatContainer">
+            <div class="text-center pt-3 pb-5">
+                <h4 class="text-secondary fw-light">Current Chat</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-9 offset-md-1">
+                    @if (messages != null)
+                    {
+                        @foreach (var item in messages)
+                        {
+                            <div class="@(item.Split(" :")[0]==ToEmail ? "col-md-12 float-start" : "col-md-12 float-end")">
+                                <div class="shadow p-4 mb-3 rounded-3 @(item.Split(" :")[0]==ToEmail ? "bg-info float-start col-md-10" : "bg-success text-light col-md-10 float-end")">
+                                    <i class="bi bi-record2-fill"></i>
+                                    <p>@item.Split(":")[0]</p>
+                                    <p>@item.Split(": ")[1]</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <h6 class="text-secondary text-end">
+                        @if (Seen != null && Online == true)
+                        {
+                            <i class="bi bi-eye"></i> @Seen
+                        }
+
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="col-md-6 offset-md-6">
+            <div class="form-group">
+                <input type="text" placeholder="Write your message" class="form-control" @bind="_message" />
+
+            </div>
+            <div class="form-group text-end pt-3">
+                <button @onclick="Send" class="btn btn-primary shadow rounded-circle"><i class="bi bi-cursor"></i></button>
+                <button class="btn btn-light shadow rounded-circle" @onclick="Reload"><i class="bi bi-arrow-repeat"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

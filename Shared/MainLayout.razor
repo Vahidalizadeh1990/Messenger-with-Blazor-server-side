@@ -1,0 +1,39 @@
+﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
+<div class="sidebar shadow">
+    <NavMenu />
+</div>
+<div class="main shadow">
+    <div class="top-row px-4">
+        <AuthorizeView>
+            <Authorized>
+                <NavLink class="nav-link link-secondary" href="/identity/account/logout" Match="NavLinkMatch.All">
+                    <i class="bi bi-person"></i> @httpContextAccessor.HttpContext.User.Identity.Name
+                </NavLink>
+                <NavLink class="nav-link link-secondary" href="/identity/account/logout" Match="NavLinkMatch.All">
+                    <i class="bi bi-power"></i> Logout
+                </NavLink>
+            </Authorized>
+            <NotAuthorized>
+                <NavLink class="nav-link link-secondary" href="/identity/account/login" Match="NavLinkMatch.All">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                </NavLink>
+                <NavLink class="nav-link link-secondary" href="/register" Match="NavLinkMatch.All">
+                    <i class="bi bi-person-plus"></i> Register
+                </NavLink>
+            </NotAuthorized>
+        </AuthorizeView>
+
+
+    </div>
+    <div class="content px-4">
+        @Body
+    </div>
+    <hr />
+    <footer class="container px-4">
+        <div class="footer">
+            &copy; 2021 - Private Messenger
+        </div>
+    </footer>
+</div>

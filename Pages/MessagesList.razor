@@ -1,0 +1,37 @@
+﻿@page "/MessagesList"
+@inherits MessagesListBase
+
+<div class="row mt-5">
+    @foreach (var item in UserProfiles)
+    {
+        <div class="col-lg-4 col-md-6 col-sm-6 pb-3">
+            <div class="card shadow text-center h-100">
+                <div class="card-body">
+                    <div class="pt-3">
+                        <img src="/UserProfile/@item.Image" class="img-fluid rounded-circle shadow" width="120" height="120" />
+                    </div>
+                    <p class="pt-3 pb-3">@item.User.UserName</p>
+                    <p class="pb-3 pt-2">@item.FirstName @item.LastName</p>
+                </div>
+                <div class="card-footer pt-3 pb-3">
+                    @if (ChatMessages.Where(x => x.FromUserId == item.UserId).Count() != 0)
+                    {
+                        <a href="/chat/@item.UserId" class="card-link text-decoration-none position-relative">
+                            <i class="bi bi-inbox-fill"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @ChatMessages.Where(x => x.FromUserId == item.UserId).Count()
+                            </span>
+                        </a>
+                        <a href="/viewuserdetails/@item.UserId" class="card-link text-decoration-none" title="Details"><i class="bi bi-three-dots-vertical"></i></a>
+                        <a href="/chat/@item.UserId" class="card-link float-left" title="Chat"><i class="bi bi-chat-dots"></i></a>
+                    }
+                    else
+                    {
+                        <a href="/viewuserdetails/@item.UserId" class="card-link text-decoration-none" title="Details"><i class="bi bi-three-dots-vertical"></i></a>
+                        <a href="/chat/@item.UserId" class="card-link float-left" title="Chat"><i class="bi bi-chat-dots"></i></a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

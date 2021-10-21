@@ -1,0 +1,41 @@
+﻿@page "/reports"
+@inherits ReportsBase
+@attribute [Authorize]
+<div class="mt-5">
+    @if (Toast)
+    {
+        <div class="text-danger">@Message</div>
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="text-secondary">Report</h3>
+        <small>If you have any reports or comments, please send it to me.</small>
+        <hr />
+        <div class="col-md-6 offset-md-3 shadow">
+            <div class="p-5">
+                <EditForm Model="ReportsForm" OnValidSubmit="HandleValidSubmit">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <label for="report" class="col-form-label">Report</label>
+                        <InputText id="report" class="form-control" placeholder="Type your comment" @bind-Value="ReportsForm.Report" />
+                        <ValidationMessage For="@(()=>ReportsForm.Report)" />
+                    </div>
+                    <div class="form-group pt-3">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    }
+</div>

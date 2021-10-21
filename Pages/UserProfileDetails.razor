@@ -1,0 +1,75 @@
+﻿@inherits UserProfileDetailsBase
+@attribute [Authorize]
+    <div class="pt-5">
+        <h3 class="text-secondary fw-light">Details of @UserProfile.User.UserName</h3>
+        <small class="text-secondary"><i class="bi bi-calendar"></i> Last updated at @UserProfile.Date.ToString("dddd, dd MMMM yyyy")</small>
+        <hr />
+        <div class="shadow">
+            <div class="p-5">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3">
+                        <label class="text-secondary">First name</label>
+                        <p class="text-dark">@UserProfile.FirstName</p>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label class="text-secondary">Last name</label>
+                        <p class="text-dark">@UserProfile.LastName</p>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <label class="text-secondary">Age</label>
+                        <p class="text-dark">@UserProfile.Age</p>
+                    </div>
+                    <div class="col-md-3 col-sm-3 text-end">
+                        <img src="UserProfile/@UserProfile.Image" class="img-fluid rounded-circle img-thumbnail" width="120" height="120" alt="@UserProfile.User.UserName" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="text-secondary">Bio</label>
+                        <p class="text-dark">@UserProfile.Bio</p>
+                    </div>
+                    <div class="col-md-3 ">
+                        <label class="text-secondary">Gender</label>
+                        @if (UserProfile.Gender == "Male")
+                        {
+                            <p>
+                                <i class="bi bi-gender-male text-primary"></i>
+                            </p>
+                        }
+                        else if (UserProfile.Gender == "Female")
+                        {
+                            <p>
+                                <i class="bi bi-gender-female text-primary"></i>
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <i class="bi bi-gender-ambiguous text-primary"></i>
+                            </p>
+                        }
+                    </div>
+                    <div class="col-md-3">
+                        <label class="text-secondary">Private</label>
+                        @if (UserProfile.Private == true)
+                        {
+                            <p class="text-dark">You account is private. <i class="bi bi-lock"></i></p>
+                        }
+                        else
+                        {
+                            <p class="text-dark">You account isn't private. <i class="bi bi-unlock"></i></p>
+                        }
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="text-end">
+                        <div class="">
+                            <a class="btn shadow-lg btn-warning" href="/UserProfileEdit"><i class="bi bi-pen"></i>  Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
