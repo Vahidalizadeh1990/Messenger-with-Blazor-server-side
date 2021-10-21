@@ -1,0 +1,15 @@
+﻿@page
+@model ConfirmEmailModel
+@{
+    ViewData["Title"] = "Confirm email";
+}
+<div class="shadow mt-5">
+    <div class="pt-5 pb-5 text-center">
+        <h1>@ViewData["Title"]</h1>
+        <p>Your email is confirmed. Now you can login into your account. Please click on Login.</p>
+        <div class="form-group pt-4 pb-4">
+            <a asp-page="./Login" class="btn btn-success btn-lg shadow-lg"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+        </div>
+    </div>
+    
+</div>

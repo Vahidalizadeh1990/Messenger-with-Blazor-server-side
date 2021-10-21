@@ -1,0 +1,67 @@
+﻿@page "/register"
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+    <div class="col-md-5 shadow">
+        <div class="p-5">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h3 class="text-secondary">Create a new account</h3>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" for="floatingEmail"></label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" asp-for="Input.Password" class="form-control" id="floatingPassword" placeholder="name@example.com" />
+                    <label asp-for="Input.Password" for="floatingPassword"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" asp-for="Input.ConfirmPassword" class="form-control" id="floatingPassword" placeholder="name@example.com" />
+                    <label asp-for="Input.ConfirmPassword" for="floatingPassword"></label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg shadow">Register</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6 offset-md-1">
+        <section>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card text-white bg-info mb-3 text-center">
+                        <div class="card-header">Login</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-light display-1"> <i class="bi bi-box-arrow-in-right"></i></a></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card text-white bg-success mb-3 text-center">
+                        <div class="card-header">Home</div>
+                        <div class="card-body">
+                            <h1 class="card-title"><a href="~/" class="text-light display-1"><i class="bi bi-house"></i></a></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <h4><i class="bi bi-chat"></i> Register into Private messenger</h4>
+                <hr />
+                <div class="text-secondary fw-light">
+                    <p class="lh-lg">You can register by the email which belongs to you and after you can login to Private messenger</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
